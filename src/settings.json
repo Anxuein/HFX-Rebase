@@ -1,0 +1,15 @@
+{
+  "type": "object",
+  "properties": {
+    "settings": {
+      "global": {
+        "ChangeBodyColor": {
+          "name": "Change Body Color",
+          "description": "Changes the body color",
+          "optcode": "toggle",
+          "default": "1"
+        }
+      }
+    }
+  }
+}

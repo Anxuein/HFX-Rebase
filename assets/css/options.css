@@ -1,0 +1,94 @@
+body{
+    padding: 15px;
+    width: 790px;
+    display: table;
+}
+
+#optionBodyTag{
+    width: 650px;
+}
+
+.nav-pills{
+    width: 110px;
+    float: left;
+    padding-right: 10px;
+    position: fixed;
+}
+
+.tab-content{
+    float: right;
+}
+
+.lineBreak{
+    width: 550px;
+    float: left;
+}
+
+#bodyTag::-webkit-scrollbar {
+    width: 5px;
+    background-color: #F5F5F5;
+} 
+#bodyTag::-webkit-scrollbar-thumb {
+    background-color: #000000;
+}
+
+.minLimitStyle{
+    color: #891a14;
+}
+
+.limitStyle{
+    color: #14892c;
+}
+
+.minLuckyStyle{
+    color: #201489;
+}
+
+.tooHighStyle{
+    color: red;
+}
+
+.maxLimitStyleL33t{
+    color: #99FF00;
+}
+
+.maxLimitStyleUb3r{
+    color: #00AAFF;
+}
+
+.maxLimitStyleEp1c{
+    color: #FFA500;
+}
+
+#headerImage{
+    width: 330px;
+    height: 210px;
+}
+
+#aboutPanel{
+    padding: 10px;
+}
+
+#githubLogoImage{
+    width: 250px;
+    height: 102px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+#hfAvatarImage{
+    width: 90px;
+    height: 90px;
+}
+
+.logoImage{
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.jscolor {
+  border: 2px black;
+  width: 60px;
+  text-align: center;
+  display: inline-block;
+}

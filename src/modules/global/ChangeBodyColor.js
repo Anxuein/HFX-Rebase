@@ -16,7 +16,4 @@ class ChangeBodyColor extends Feature {
   }
 };
 
-window.addEventListener("load", function () {
-  console.log(window);
-  module.exports = new ChangeBodyColor();
-});
+module.exports = new ChangeBodyColor();

@@ -48,16 +48,31 @@ class Settings {
     });
   }
 
-  exists (section, setting) {
-
+  exists (section, key, setting, cb) {
+    chrome.storage.sync.get(section, function (items) {
+      if (setting === null) {
+        return cb(Boolean(items[section][key]));
+      } else {
+        return cb(Boolean(items[section][key][setting]));
+      }
+    });
   }
 
-  get (section, setting) {
-
+  get (section, key, setting, cb) {
+    chrome.storage.sync.get(section, function (items) {
+      return cb(items[section][key][setting]);
+    });
+    return cb(null);
   }
 
-  set (section, setting) {
-
+  set (section, key, setting) {
+    chrome.storage.sync.get(section, function (items) {
+      var obj = items;
+      obj[section][key][setting] = setting;
+      chrome.storage.sync.set(obj, function () {
+        HFX.Logger.debug(`Updated ${key}:${setting}`);
+      });
+    });
   }
 
   clear () {

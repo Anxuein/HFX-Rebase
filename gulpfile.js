@@ -14,9 +14,12 @@ gulp.task("core", function () {
 
 gulp.task("build", ["core"], function () {
   gulp.src([
-    "src/modules/global/**/*.js"
+    "src/modules/global/**.js"
   ])
-    .pipe(browserify())
     .pipe(concat("Global.js"))
+    .pipe(browserify())
     .pipe(gulp.dest("./release/js/"));
+});
+
+gulp.task("default", ["core", "build"], function () {
 });

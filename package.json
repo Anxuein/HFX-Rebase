@@ -2,7 +2,7 @@
   "name": "hfx-rebase",
   "version": "0.0.1",
   "description": "",
-  "main": "src/index.js",
+  "main": "src/_core/HFX.js",
   "browser": ["release/Global.js"],
   "scripts": {
     "lint": "./node_modules/.bin/eslint ./src/**",

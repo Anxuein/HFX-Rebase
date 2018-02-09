@@ -1,5 +1,5 @@
-const Feature = require("../../_core/Feature");
-class ChangeBodyColor extends Feature {
+require("../../_core/HFX");
+class ChangeBodyColor extends HFX.Feature {
   constructor () {
     super({
       id: "ChangeBodyColor",
@@ -11,7 +11,6 @@ class ChangeBodyColor extends Feature {
   }
 
   run () {
-    console.log("Running ChangeBodyColor...");
     $("table").css("color", "red");
   }
 };

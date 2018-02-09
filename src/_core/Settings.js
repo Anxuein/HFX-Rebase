@@ -1,14 +1,46 @@
-module.exports = class Settings {
+require("./HFX");
+class Settings {
   init () {
     this.loadSettings();
   }
 
   loadSettings () {
-    chrome.storage.sync.get(null, function (items) {
-      var keys = Object.keys(items);
-      if (keys === 0) {
-        this.createNewSettings();
+  }
+
+  getFeatureSettings (section, key, defaultOpt, cb) {
+    HFX.Logger.debug(`Creating ${section}`);
+    chrome.storage.sync.get(section, function (items) {
+      if (Object.keys(items).length === 0) {
+        return cb(null);
       }
+
+      if (items[section][key] === undefined) {
+        return cb(null);
+      }
+
+      return cb(items);
+    });
+  }
+
+  create (section, key, defaultOpt) {
+    HFX.Logger.debug(`Creating... ${key}`);
+    chrome.storage.sync.get(section, function (items) {
+      var keys = Object.keys(items);
+      var obj = {};
+      if (keys.length === 0) {
+        obj[section] = {};
+        obj[section][key] = {};
+        obj[section][key]["default"] = defaultOpt;
+        chrome.storage.sync.set(obj);
+      } else {
+        obj = items;
+        obj[section][key] = {};
+        obj[section][key]["default"] = defaultOpt;
+        chrome.storage.sync.set(obj);
+      }
+    });
+    chrome.storage.sync.get(section, function (items) {
+      HFX.Logger.debug("items: ", items);
     });
   }
 
@@ -30,3 +62,4 @@ module.exports = class Settings {
 
   }
 };
+module.exports = new Settings();

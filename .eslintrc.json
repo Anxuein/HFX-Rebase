@@ -7,6 +7,7 @@
   "globals": {
     "$": true,
     "chrome": true,
-    "FileReader": true
+    "FileReader": true,
+    "HFX": true
   }
 }

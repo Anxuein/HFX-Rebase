@@ -11,15 +11,19 @@ module.exports = class Feature {
       }
     };
 
-    HFX.Settings.getFeatureSettings(opts.section, childClass, opts.default, function (settings) {
+    HFX.Settings.getFeatureSettings(opts.section, childClass, opts.default, opts.name, opts.description, this, function (settings, Feature) {
       if (!settings) {
-        HFX.Settings.create(opts.section, childClass, opts.default);
+        if (opts.default) {
+          Feature.run();
+        }
+        HFX.Settings.create(opts.section, childClass, opts.default, opts.name, opts.description);
       } else {
-        HFX.Logger.debug("settings: ", settings);
+        if (settings.enabled) {
+          Feature.run();
+        }
       }
     });
 
-    HFX.Logger.log(`${childClass} loaded.`);
-    this.run();
+    HFX.Logger.debug(`${childClass} loaded.`);
   }
 };

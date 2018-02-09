@@ -2,10 +2,9 @@ require("../../_core/HFX");
 class ChangeBodyColor extends HFX.Feature {
   constructor () {
     super({
-      id: "ChangeBodyColor",
       section: "global",
       name: "Change Body Color",
-      default: 0,
+      default: 1,
       description: "Change color."
     });
   }

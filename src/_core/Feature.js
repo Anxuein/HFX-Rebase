@@ -11,15 +11,19 @@ module.exports = class Feature {
       }
     };
 
+    if (opts.subsection === undefined) {
+      opts.subsection = "general";
+    }
+
     HFX.Settings.getFeatureSettings(opts.section, childClass, opts.default, opts.name, opts.description, this, function (settings, Feature) {
       if (!settings) {
         if (opts.default) {
-          Feature.run();
+          Feature.run(opts.default);
         }
         HFX.Settings.create(opts.section, childClass, opts.default, opts.name, opts.description);
       } else {
         if (settings.enabled) {
-          Feature.run();
+          Feature.run(settings.default);
         }
       }
     });

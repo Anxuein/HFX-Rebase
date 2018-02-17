@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "description": "",
   "main": "src/_core/HFX.js",
-  "browser": ["release/Global.js"],
+  "browser": [
+    "release/Global.js"
+  ],
   "scripts": {
     "lint": "./node_modules/.bin/eslint ./src/**",
     "test": "echo \"Error: no test specified\" && exit 1"

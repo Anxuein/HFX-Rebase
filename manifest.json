@@ -13,7 +13,7 @@
   "description": "Enhance your HF Experience!",
   "options_ui": {
     "chrome_style": true,
-    "page": "assets/pages/options.html"
+    "page": "assets/pages/new_options.html"
   },
   "incognito": "spanning",
   "author": "xadamxk",
@@ -26,7 +26,7 @@
       "128": "assets/images/icon128.png"
     },
     "default_title": "HFX Settings",
-    "default_popup": "assets/pages/options.html"
+    "default_popup": "assets/pages/new_options.html"
   },
   "background": {
   },
@@ -35,7 +35,7 @@
       "run_at": "document_end",
       "matches": ["*://hackforums.net/*"],
       "js": [
-        "assets/dependencies/jquery-3.2.1.js",
+        "assets/lib/jquery/jquery.min.js",
         "release/js/Core.js",
         "release/js/Global.js"
       ]

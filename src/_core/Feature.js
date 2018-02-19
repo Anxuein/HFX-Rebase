@@ -1,4 +1,3 @@
-require("./HFX");
 module.exports = class Feature {
   constructor (opts) {
     var required = ["section", "name", "default", "description"];

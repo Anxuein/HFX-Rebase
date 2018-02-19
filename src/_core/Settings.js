@@ -1,5 +1,9 @@
 require("./HFX");
+var queue = [];
 class Settings {
+  constructor () {
+    this.running = false;
+  }
   getFeatureSettings (section, key, defaultOpt, name, description, Feature, cb) {
     chrome.storage.sync.get(section, function (items) {
       if (Object.keys(items).length === 0) {
@@ -15,6 +19,20 @@ class Settings {
   }
 
   create (section, key, defaultOpt, name, description) {
+    queue.push({ "section": section, "key": key, "defaultOpt": defaultOpt, "name": name, "description": description });
+    this.processQueue();
+  }
+
+  processQueue () {
+    if (queue.length === 0 || this.running) {
+      return false;
+    }
+    this.running = true;
+    var section = queue[0].section;
+    var key = queue[0].key;
+    var defaultOpt = queue[0].defaultOpt;
+    var name = queue[0].name;
+    var description = queue[0].description;
     chrome.storage.sync.get(section, function (items) {
       var keys = Object.keys(items);
       var obj = {};
@@ -27,6 +45,7 @@ class Settings {
         obj[section][key]["description"] = description;
         chrome.storage.sync.set(obj, function () {
           HFX.Logger.debug(`Added ${key} AND ${section}`);
+          HFX.Settings.proceedQueue();
         });
       } else {
         obj = items;
@@ -37,9 +56,18 @@ class Settings {
         obj[section][key]["description"] = description;
         chrome.storage.sync.set(obj, function () {
           HFX.Logger.debug(`Added ${key} in ${section}`);
+          HFX.Settings.proceedQueue();
         });
       }
     });
+  }
+
+  proceedQueue () {
+    this.running = false;
+    console.log("before", queue);
+    queue.shift();
+    console.log("after", queue);
+    this.processQueue();
   }
 
   printSettings () {

@@ -5,7 +5,7 @@ var browserify = require("gulp-browserify");
 
 gulp.task("core", function () {
   gulp.src([
-    "./src/_core/*.js"
+    "./src/_core/HFX.js"
   ])
     .pipe(concat("Core.js"))
     .pipe(browserify())

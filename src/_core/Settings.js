@@ -64,9 +64,7 @@ class Settings {
 
   proceedQueue () {
     this.running = false;
-    console.log("before", queue);
     queue.shift();
-    console.log("after", queue);
     this.processQueue();
   }
 

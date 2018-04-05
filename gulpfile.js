@@ -2,6 +2,7 @@ var gulp = require("gulp");
 var concat = require("gulp-concat");
 // var uglify = require("gulp-uglify");
 var browserify = require("gulp-browserify");
+var watch = require("gulp-watch");
 
 gulp.task("core", function () {
   gulp.src([
@@ -40,4 +41,10 @@ gulp.task("libs", function () {
 });
 
 gulp.task("default", ["core", "build"], function () {
+});
+
+gulp.task('watch', ['build'], function() {
+  watch("src/**/*.js", function() {
+    gulp.start("build");
+  });
 });

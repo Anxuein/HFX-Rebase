@@ -20,10 +20,12 @@ $(document).ready(function () {
       addSectionToList(key);
       buildSectionBase(key);
       for (var setting in data[key]) {
+        console.log(data);
         // default, description, enabled, name
         addSettingOptionToList(key, data[key][setting]);
       }
     }
+    createChangeHandlers();
   });
 
   function addSectionToList (name) {
@@ -45,13 +47,14 @@ $(document).ready(function () {
   function addSettingOptionToList (sectionName, setting) {
     setting.description = setting.description.replace(/(?:\r\n|\r|\n)/g, "<br />");
     var checked = Boolean(setting.enabled) === true ? "checked" : "";
+    console.log(setting);
     $(`#${sectionName}`).find(".card").append(`
     <div class="d-flex justify-content-start">
       <div class="mr-auto p-2">${setting.name}</div>
       <div class="p-2">${setting.description}</div>
       <div class="mt-auto p-2">
         <div class="checkbox-slider--default">
-          <label><input type="checkbox" ${checked}><span></span><label>
+          <label><input type="checkbox" id="${sectionName}-${setting.id}" ${checked}><span></span><label>
         </div>
       </div>
     </div>
@@ -60,5 +63,25 @@ $(document).ready(function () {
 
   function capFirstLetter (something) {
     return something.charAt(0).toUpperCase() + something.slice(1);
+  }
+
+  function createChangeHandlers() {
+    $("input[type=checkbox]").change(function() {
+      var section = $(this).attr("id").split("-")[0];
+      var id = $(this).attr("id").split("-")[1];
+      chrome.storage.sync.get(section, function(items) {
+        var obj = items;
+        Object.keys(obj.global).forEach(function(key, index) {
+          console.log(`key: `, key);
+          console.log(`index: `, index);
+          console.log(obj.global);
+          console.log(obj.global[key]);
+          if (obj.global[key]["id"] === id) {
+            obj.global[key]["enabled"] = $(this).prop("checked");
+            chrome.storage.sync.set(obj, function () {});
+          }
+        });
+      })
+    });
   }
 });

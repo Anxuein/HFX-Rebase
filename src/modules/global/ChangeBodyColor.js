@@ -5,7 +5,8 @@ class ChangeBodyColor extends HFX.Feature {
       section: "global",
       name: "Change Body Color",
       default: 1,
-      description: "Change color."
+      description: "Change color.",
+      id: "changebodycolor"
     });
   }
 

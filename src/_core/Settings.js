@@ -4,7 +4,7 @@ class Settings {
   constructor () {
     this.running = false;
   }
-  getFeatureSettings (section, key, defaultOpt, name, description, Feature, cb) {
+  getFeatureSettings (section, key, defaultOpt, name, description, id, Feature, cb) {
     chrome.storage.sync.get(section, function (items) {
       if (Object.keys(items).length === 0) {
         return cb(null, Feature);
@@ -18,8 +18,8 @@ class Settings {
     });
   }
 
-  create (section, key, defaultOpt, name, description) {
-    queue.push({ "section": section, "key": key, "defaultOpt": defaultOpt, "name": name, "description": description });
+  create (section, key, defaultOpt, name, description, id) {
+    queue.push({ "section": section, "key": key, "defaultOpt": defaultOpt, "name": name, "description": description, "id": id });
     this.processQueue();
   }
 
@@ -33,9 +33,11 @@ class Settings {
     var defaultOpt = queue[0].defaultOpt;
     var name = queue[0].name;
     var description = queue[0].description;
+    var id = queue[0].id;
     chrome.storage.sync.get(section, function (items) {
       var keys = Object.keys(items);
       var obj = {};
+      console.log(queue[0]);
       if (keys.length === 0) {
         obj[section] = {};
         obj[section][key] = {};
@@ -43,6 +45,7 @@ class Settings {
         obj[section][key]["enabled"] = defaultOpt;
         obj[section][key]["name"] = name;
         obj[section][key]["description"] = description;
+        obj[section][key]["id"] = id;
         chrome.storage.sync.set(obj, function () {
           HFX.Logger.debug(`Added ${key} AND ${section}`);
           HFX.Settings.proceedQueue();
@@ -54,6 +57,7 @@ class Settings {
         obj[section][key]["enabled"] = defaultOpt;
         obj[section][key]["name"] = name;
         obj[section][key]["description"] = description;
+        obj[section][key]["id"] = id;
         chrome.storage.sync.set(obj, function () {
           HFX.Logger.debug(`Added ${key} in ${section}`);
           HFX.Settings.proceedQueue();
@@ -104,6 +108,12 @@ class Settings {
   clear () {
     chrome.storage.sync.clear(function () {
       HFX.Logger.log("Cleared storage");
+    });
+  }
+
+  getTotal(cb) {
+    chrome.storage.sync.get(null, function(items) {
+      return cb(Object.keys(items).length);
     });
   }
 };

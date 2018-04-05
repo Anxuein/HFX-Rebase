@@ -5,7 +5,8 @@ class CollapsePossiblyRelatedThreads extends HFX.Feature {
       section: "global",
       name: "Collapse Possibly Related Threads",
       default: 1,
-      description: "Automatically collapse 'Possibly Related Threads' results.\n\nClick the toggle image to view results"
+      description: "Automatically collapse 'Possibly Related Threads' results.\n\nClick the toggle image to view results",
+      id: "collapsepossiblylrelatedthreads"
     });
   }
 

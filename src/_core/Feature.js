@@ -1,6 +1,6 @@
 module.exports = class Feature {
   constructor (opts) {
-    var required = ["section", "name", "default", "description"];
+    var required = ["section", "name", "default", "description", "id"];
     var childClass = this.constructor.name;
 
     for (var index in required) {
@@ -14,12 +14,12 @@ module.exports = class Feature {
       opts.subsection = "general";
     }
 
-    HFX.Settings.getFeatureSettings(opts.section, childClass, opts.default, opts.name, opts.description, this, function (settings, Feature) {
+    HFX.Settings.getFeatureSettings(opts.section, childClass, opts.default, opts.name, opts.description, opts.id, this, function (settings, Feature) {
       if (!settings) {
         if (opts.default) {
           Feature.run(opts.default);
         }
-        HFX.Settings.create(opts.section, childClass, opts.default, opts.name, opts.description);
+        HFX.Settings.create(opts.section, childClass, opts.default, opts.name, opts.description, opts.id);
       } else {
         if (settings.enabled) {
           Feature.run(settings.default);

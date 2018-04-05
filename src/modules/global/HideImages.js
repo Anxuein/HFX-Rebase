@@ -5,7 +5,8 @@ class HideImages extends HFX.Feature {
       section: "global",
       name: "Hides images",
       default: 1,
-      description: "Hides images"
+      description: "Hides images",
+      id: "hidesimages"
     });
   }
 

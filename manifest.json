@@ -36,15 +36,18 @@
       "matches": ["*://hackforums.net/*"],
       "js": [
         "assets/lib/jquery/jquery.min.js",
-        "release/js/Core.js",
         "release/js/Global.js"
+      ],
+      "css": [
+        "assets/css/HFX.css"
       ]
     }
   ],
   "permissions": [
     "storage",
     "https://raw.githubusercontent.com/xadamxk/HFX/master/Badges.json?nc=*",
-    "https://raw.githubusercontent.com/xadamxk/HFX/master/Alert.json?nc=*"
+    "https://raw.githubusercontent.com/xadamxk/HFX/master/Alert.json?nc=*",
+    "https://gist.github.com/Anxuein/c5195ea26a67beb670e5bbc338f3349c/raw/*"
   ],
   "omnibox": {
     "keyword": "HF"

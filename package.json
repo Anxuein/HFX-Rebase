@@ -14,6 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "bootstrap": "^4.0.0",
+    "browserify-resolutions": "^1.1.0",
     "eslint": "^4.17.0",
     "eslint-config-standard": "^11.0.0-beta.0",
     "eslint-plugin-import": "^2.8.0",

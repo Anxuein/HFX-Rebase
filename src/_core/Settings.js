@@ -90,15 +90,17 @@ class Settings {
 
   get (section, key, setting, cb) {
     chrome.storage.sync.get(section, function (items) {
+      if (typeof items[section][key] === 'undefined' || typeof items[section][key][setting] === 'undefined') {
+        return cb(null);
+      }
       return cb(items[section][key][setting]);
     });
-    return cb(null);
   }
 
-  set (section, key, setting) {
+  set (section, key, setting, value) {
     chrome.storage.sync.get(section, function (items) {
       var obj = items;
-      obj[section][key][setting] = setting;
+      obj[section][key][setting] = value;
       chrome.storage.sync.set(obj, function () {
         HFX.Logger.debug(`Updated ${key}:${setting}`);
       });

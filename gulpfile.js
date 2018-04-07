@@ -4,18 +4,11 @@ var concat = require("gulp-concat");
 var browserify = require("gulp-browserify");
 var watch = require("gulp-watch");
 
-gulp.task("core", function () {
-  gulp.src([
-    "./src/_core/HFX.js"
-  ])
-    .pipe(concat("Core.js"))
-    .pipe(browserify())
-    .pipe(gulp.dest("./release/js"));
-});
 
-gulp.task("build", ["core"], function () {
+gulp.task("build", [], function () {
   gulp.src([
-    "src/modules/global/**.js"
+    "src/modules/global/**.js",
+    "src/_core/modules/**.js"
   ])
     .pipe(concat("Global.js"))
     .pipe(browserify())
@@ -40,7 +33,7 @@ gulp.task("libs", function () {
     .pipe(gulp.dest("./assets/lib/fontawesome"));
 });
 
-gulp.task("default", ["core", "build"], function () {
+gulp.task("default", ["build"], function () {
 });
 
 gulp.task('watch', ['build'], function() {
